@@ -2,7 +2,7 @@
 
 We'll be discussing the **d**ensity-**b**ased **s**patial **c**lustering of **a**pplications with **n**oise method in class, April 11th.  The slides can be found on Moodle as well as in this repository.
 
-I do not have skeleton code to offer.  However, using the pseudocode you have from class discussion and the notes, you should be able to figure out a creative method!  You may check your work on the built-in methods provided by R and Python.
+I only have skeleton code in Python.  However, using the pseudocode you have from class discussion and the notes, you should be able to figure out a creative method!  You may check your work on the built-in methods provided by R and Python.
 
 * If you create a working program by **April 20th**, you will receive full credit on the assignment.
 * If you create a working program by April 20th in both Python and R, you will receive full credit and bonus points.
