@@ -4,6 +4,7 @@
 # Summary: This program analyzes three different datasets, and attempts to group
 # them into the intended clusters using DBSCAN
 
+import time as t
 import csv
 import numpy as np
 from scipy.spatial import distance
@@ -21,7 +22,7 @@ class Point:
         self.visit = False
 
 
-def DBSCAN (points, points_min, radius_max, data_name):
+def DBSCAN (points, points_min, radius_max, data_name, debplot = False):
     """
     Args:
         points : list of objects belonging to point class defined above
@@ -32,17 +33,17 @@ def DBSCAN (points, points_min, radius_max, data_name):
     cur_num = 0
 
     # for conversion to R
-    print("pre:", data_name)
-    r_x = []
-    r_y = []
-    r_visit = []
-    r_group = []
-    for i in points:
-        r_x.append(i.x)
-        r_y.append(i.y)
-        r_visit.append(i.visit)
-        r_group.append(i.group)
-    print("x: {0}\ny: {1}\nvisit: {2}\ngroup: {3}\n".format(r_x, r_y, r_visit, r_group))
+    # print("pre:", data_name)
+    # r_x = []
+    # r_y = []
+    # r_visit = []
+    # r_group = []
+    # for i in points:
+    #     r_x.append(i.x)
+    #     r_y.append(i.y)
+    #     r_visit.append(i.visit)
+    #     r_group.append(i.group)
+    # print("x: {0}\ny: {1}\nvisit: {2}\ngroup: {3}\n".format(r_x, r_y, r_visit, r_group))
 
     while True:
         # find unvisited point to work with
@@ -80,33 +81,35 @@ def DBSCAN (points, points_min, radius_max, data_name):
             point.visit = True
             point.group = -1
 
-    # convert to easier group numbers
-    groups_to_convert = []
-    for i in points:
-        if not(i.group in groups_to_convert) and i.group != -1:
-            groups_to_convert.append(i.group)
-    for i in points:
-        for j in range(len(groups_to_convert)):
-            if i.group == groups_to_convert[j]:
-                i.group = j
 
-    # clears plot
-    plt.clf()
+    if debplot == True:
+        # convert to easier group numbers
+        groups_to_convert = []
+        for i in points:
+            if not(i.group in groups_to_convert) and i.group != -1:
+                groups_to_convert.append(i.group)
+        for i in points:
+            for j in range(len(groups_to_convert)):
+                if i.group == groups_to_convert[j]:
+                    i.group = j
 
-    # plotting
-    colors = ["b", "g", "r", "c", "m", "y"]
-    black = "k"
-    for i in range(len(points)):
-        if points[i].group != -1:
-            color = colors[points[i].group % len(colors)]
-        else:
-            color = "k"
-        plt.scatter(x=points[i].x, y=points[i].y, color=color)
+        # clears plot
+        plt.clf()
 
-    fig = plt.gcf()
-    plt.title("{0} Clusters".format(data_name))
-    fig.canvas.set_window_title("Cluster Plots")
-    plt.show()
+        # plotting
+        colors = ["b", "g", "r", "c", "m", "y"]
+        black = "k"
+        for i in range(len(points)):
+            if points[i].group != -1:
+                color = colors[points[i].group % len(colors)]
+            else:
+                color = "k"
+            plt.scatter(x=points[i].x, y=points[i].y, color=color)
+
+        fig = plt.gcf()
+        plt.title("{0} Clusters".format(data_name))
+        fig.canvas.set_window_title("Cluster Plots")
+        plt.show()
 
     # # for conversion to R
     # print("post:", data_name)
@@ -151,6 +154,13 @@ for i in range(len(x3)):
     blobs.append(Point(x3[i], y3[i]))
 
 # call on all data sets
+time = t.clock()
 DBSCAN(moons, 2, .2, "Moon")
+print(time - t.clock())
+time = t.clock()
 DBSCAN(circles, 2, .35, "Circle")
+print(time - t.clock())
+time = t.clock()
 DBSCAN(blobs, 2, 2, "Blob")
+print(time - t.clock())
+time = t.clock()

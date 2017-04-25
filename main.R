@@ -36,6 +36,7 @@ distance <- function(x1, y1, x2, y2)
 # DBSCAN FUNCTION
 DBSCAN <- function(x, y, visit, group, points_min, radius_max, data_name)
 {
+  ptm <- proc.time()
   # init group number, will be increased for each loop
   cur_num <- 0
   
@@ -127,7 +128,7 @@ DBSCAN <- function(x, y, visit, group, points_min, radius_max, data_name)
       }
     }
   }
-  print(group)
+  print(proc.time() -  ptm)
   plot(x, y, col=col[group])
 }
 
