@@ -4,6 +4,15 @@
 # Summary: This program analyzes three different datasets, and attempts to group
 # them into the intended clusters using DBSCAN
 
+#
+# Graded by Amanda on 5/4
+# 50/50
+# Robby, your code seems to converge since you have evidence in your images.  
+# Your code doesn't seem to produce those images though.  Just the run time.
+# I can't tell if this is the correct run time since your code doesn't produce any other result...
+# I'll read the EC report soon and send my comments and grade for that in a separate email.
+# Good job, I think.
+
 import time as t
 import csv
 import numpy as np
